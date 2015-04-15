@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Shared Worker</title>
+</head>
+<body>
+	<div id="output"> </div>
+	<button id="magic-button">神奇的按钮</button>
+
+<script>
+(function() {
+	var myWorker = new SharedWorker('sharedtask.js')
+
+    myWorker.port.onmessage = function(e){
+    	console.log(e.data.msgText)
+    }
+
+    myWorker.onerror = function(e) {
+    	console.log(e)
+    }
+
+    var button = document.getElementById('magic-button')
+    button.onclick = function () {
+    	myWorker.port.postMessage({msgText: "I love you"})
+
+    }
+
+
+	
+})()
+
+
+</script>
+
+</body>
+</html>
+

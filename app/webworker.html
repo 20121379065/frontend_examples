@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>WebWorker</title>
+</head>
+<body>
+	<div id="output"> </div>
+<script>
+(function() {
+	var myWorker = new Worker('long_task.js')
+    var output = document.getElementById('output')
+    myWorker.onmessage = function (event) {
+        var message = event.data
+        output.innerHTML = message
+    }
+
+	
+})()
+
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,14 @@
+CACHE MANIFEST
+# v1.6
+
+appcache.html
+offline.html
+../css/octicons.css
+../css/fonts/octicons.eot
+../css/fonts/octicons.ttf
+../css/fonts/octicons.woff
+../css/fonts/octicons.svg
+
+FALLBACK:
+appcache.html offline.html
+notcached.html offline.html

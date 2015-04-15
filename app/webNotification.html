@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+	<title>Notification</title>
+</head>
+<body>
+	<script>
+window.onload = function(){
+	Notification.requestPermission(function(status){
+		if(Notification.permission !== status) {
+			Notification.permission = status
+		}
+
+		window.setTimeout(function(){
+			console.log("hi")
+			var n = new Notification("HIHOEIJOIJOJOJIOIJ")
+		}, 10000);
+	})
+}
+	</script>
+</body>
+</html>

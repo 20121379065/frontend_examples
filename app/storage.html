@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>localStorage</title>
+</head>
+
+<body>
+<form id="page-form" action="" method="">
+    <input type="hidden" id="page-id" name="page-id" value="392" />
+	<label for="name">姓名 </label>
+    <input name="name" id="name" />
+    <label for="description">描述</label>
+    <textarea name="description" id="description" ></textarea>
+	<button type="submit">好！</button>
+</form>
+
+<script>
+(function() {
+	var pageId = document.getElementById('page-id').value
+	
+    function saveField(event) {
+	
+		localStorage.setItem(pageId + '-' + event.target.name, 
+							 event.target.value)
+		
+	}
+	
+	function setupFormStorage() {
+	    var form = document.getElementById("page-form")
+		   , inputs = form.getElementsByTagName("input")
+		   , textareas = form.getElementsByTagName("textarea")
+		   inputs = [].slice.call(inputs)
+		   textareas = [].slice.call(textareas)
+		   inputs = inputs.concat(textareas)
+		var i = 0
+		for(; i !=inputs.length; ++i) {
+			var input = inputs[i]
+			input.addEventListener("change", saveField)
+		}
+	}
+	
+	function removePrefix(s) {
+		return s.replace(pageId + '-', "")
+	}
+	
+	function restoreForm() {
+		var i = 0
+		for(; i!=localStorage.length; ++i) {
+			if (localStorage.key(i).search(pageId + '-') !== -1) {
+				var rawKey = localStorage.key(i)
+				  , key = removePrefix( localStorage.key(i) )
+				  , elem = document.querySelector('[name="'+ key +'"]')
+			
+				if(elem) {
+					elem.value = localStorage.getItem(rawKey)
+				}
+			}
+		}
+	}
+	
+	
+	
+	window.onload = function () {
+		restoreForm()
+		setupFormStorage()
+	}
+	
+	var onStorageChange = function (event) 
+	{ 
+		//if (event.storageArea == localStorage) {/**/}
+		//if (event.storageArea == sessionStorage) {/**/}
+		event.storageArea.setItem(event.key, event.newValue)
+		var key =  removePrefix(event.key)
+		var input = document.querySelector('[name="'+ key +'"]')
+		if (input) {
+			input.value = event.newValue
+		}
+	
+		//alert(event.key + ' has been changed from ' + event.oldValue + 
+		 //     ' to ' + event.newValue + '.')
+	}
+	
+	window.addEventListener('storage', onStorageChange, false);	
+	
+})()
+
+
+</script>
+
+</body>
+</html>
+

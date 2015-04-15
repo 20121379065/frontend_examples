@@ -1,0 +1,46 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "base";
+@import "compass/css3/animation";
+@import "compass/css3/images";
+
+.polling_message {
+  color:white;
+  float:left;
+  margin-right:2%;            
+}
+
+.view_port {
+  background-color:black;
+  height:25px;
+  width:100%;
+  overflow: hidden;
+}
+
+$animation_name: move_eye;
+
+.cylon_eye {
+  color:white;
+  height: 100%;
+  width: 20%;
+
+  background-color: red;
+
+  @include background-image( linear-gradient(left, rgba( 0,0,0,0.9 ) 25%, rgba( 0,0,0,0.1 ) 50%, rgba( 0,0,0,0.9 ) 75%));
+
+  @include animation($animation_name 4s linear 0s infinite alternate);
+  
+
+}
+
+@include keyframes($animation_name) {
+    from { margin-left:-20%; } to { margin-left:100%; } 
+}
+
+.ls-editor {
+    
+    min-height: 300px;
+}
